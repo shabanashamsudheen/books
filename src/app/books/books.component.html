@@ -1,0 +1,54 @@
+<div class="container-fluid p-5">
+<h5 class="text-center">My Library</h5>  
+    <div class="row">
+      <div class="col-12">
+        
+            <div class="row mb-3">
+             
+              <div class="col-md-12">
+                  <a class="btn btn-success float-end" (click)="open()">
+                   Add New List
+                  </a>
+              </div>
+            </div>
+            <ngb-accordion #acc="ngbAccordion" activeId="0" [closeOthers]="true">
+              <ngb-panel  *ngFor="let lists of booksList;let i=index">
+                <ng-template ngbPanelTitle class="text-black">
+                <h4><b>{{lists.name}}</b></h4>
+                </ng-template>
+                <ng-template ngbPanelContent >    
+                  <div class="row">
+                    <div class="col-md-12 mb-2">
+                      <button class="btn btn-danger btn-sm float-end " (click)="deleteList(i)">Delete</button>
+
+                      <button class="btn btn-primary btn-sm float-end me-2" (click)=addBook(i)>Add Book</button>
+                     
+                    </div>
+                  </div>   
+                  <div class="table mb-0" >
+                    <table class="table dt-responsive nowrap no-footer dtr-inline" >
+                      <thead class="table-light" cdkDropList  (cdkDropListDropped)="drop($event,i)">
+                        <tr cdkDrag  cdkDragLockAxis="y" *ngFor="let list of lists.books;let j=index ">
+                          <th class="c-scroll">{{list.title}}</th>
+                          <td>{{list.year}}</td>
+                          <td>{{list.author}}</td>
+                          <th class="text-center">
+                            <div >
+                              <a class="btn btn-sm btn-danger" href="javascript: void(0);" (click)="deleteRow(i,j)">Delete</a>
+                            </div>
+                          </th>
+                        </tr> 
+                      </thead>
+                     
+                    </table>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+              
+              
+            </ngb-accordion>
+            
+      </div>
+      <!-- end row -->
+    </div>
+</div>
